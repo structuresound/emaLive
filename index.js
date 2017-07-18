@@ -1647,33 +1647,26 @@ module.exports = new Schema({
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var js_moss_1 = __webpack_require__(16);
-var max_1 = __webpack_require__(52);
-var ableton_1 = __webpack_require__(54);
+var max_1 = __webpack_require__(51);
+var ableton_1 = __webpack_require__(52);
 inlets = 1;
 outlets = 4;
-var configFile = __webpack_require__(53);
+var configFile = __webpack_require__(54);
 var songs = js_moss_1.load(configFile, '');
 var globals = {};
-max.init = function () {
-    max_1.post('recompiled');
-    // setInterval(2000, () => {
-    //   post(JSON.stringify(songs.solace.tempo));
-    // });
-    globals = {
-        tempo: new ableton_1.JsApi('tempo')
-    };
-    max_1.outlet(0, 'songs _parameter_range ' + Object.keys(songs).join(' '));
-};
+var ready = false;
+max_1.on('init', function (args) {
+    globals.info = new ableton_1.JsApi('live_set');
+    globals.tempo = new ableton_1.JsApi('live_set song tempo');
+    max_1.outlet(0, 'songs _parameter_range ' + Object.keys(songs).sort().join(' '));
+    ready = true;
+});
 max_1.on('setSong', function (args) {
     var song = args[0];
-    max_1.post('set song' + args[0]);
     var info = songs[song];
-    max_1.post(info);
-    globals['tempo'].set('value', info.tempo);
+    max_1.post('set song ' + song + ' @ ' + info.tempo);
+    globals.tempo.set('value', info.tempo);
 });
-max.myFunc = function () {
-    max_1.post('myFunc');
-};
 
 
 /***/ }),
@@ -15057,8 +15050,7 @@ module.exports.safeDump = safeDump;
 
 
 /***/ }),
-/* 51 */,
-/* 52 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15085,19 +15077,13 @@ exports.on = on;
 
 
 /***/ }),
-/* 53 */
-/***/ (function(module, exports) {
-
-module.exports = "$<:\n  qn: 7\n#Future's Void\n100Years:\n  tempo: 80\n3Jane:\n  tempo: 92\n  quantize: $qn\ncthulu:\n  tempo: 144\ndeadCelebrity:\n  tempo: 78\n  quantize: $qn\nneuromancer:\n  tempo: 100\nsatellites:\n  tempo: 120\n  quantize: 5\nsmolder:\n  tempo: 80\n  quantize: $qn\nsoBlonde:\n  tempo: 85\nsolace:\n  tempo: 140\nwhenSheComes:\n  tempo: 104\n#Others\nbypass:\n  tempo: 120\nfalseFlag: \n  tempo: 192\nwhiteLikeHeaven:\n  tempo: 120\nangelo:\n  tempo: 124\n  quantize: 5\nringFinger:\n  tempo: 113\n  quantize: $qn\n#Past Life\nanteroom:\n  tempo: 120\nbutterflyKnife:\n  tempo: 98\ncalifornia:\n  tempo: 70\ngreyShip:\n  tempo: 120\nmarked:\n  tempo: 90\nmilkMan:\n  tempo: 106\n  quantize: $qn\n#Exile\n33NihilisticAndFemale:\n  tempo: 120\n  quantize: 5\n7Years:\n  tempo: 120\naryanNation:\n  tempo: 116\nbreathalyzer:\n  tempo: 70\n  quantize: $qn\nbloodAndChalk:\n  tempo: 120\n  quantize: $qn\ndownAndOut:\n  tempo: 114\nlsd:\n  tempo: 92\n  quantize: $qn\npapaer:\n  tempo: 84\ndestroy:\n  tempo: 164\nreceiveLove:\n  tempo: 120"
-
-/***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ssplit_1 = __webpack_require__(55);
+var ssplit_1 = __webpack_require__(53);
 var ApiObserver = (function () {
     function ApiObserver(api, property, callback) {
         var self = this;
@@ -15243,7 +15229,7 @@ exports.ApiClient = ApiClient;
 
 
 /***/ }),
-/* 55 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15293,6 +15279,12 @@ function splitEnd(str, sep, lim, cur, acc) {
     return splitEnd(str, sep, lim, index - 1, acc);
 }
 
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports) {
+
+module.exports = "$<:\n  qn: 7\n#Future's Void\n100Years:\n  tempo: 80\n3Jane:\n  tempo: 92\n  quantize: $qn\ncthulu:\n  tempo: 144\ndeadCelebrity:\n  tempo: 78\n  quantize: $qn\nneuromancer:\n  tempo: 100\nsatellites:\n  tempo: 120\n  quantize: 5\nsmolder:\n  tempo: 80\n  quantize: $qn\nsoBlonde:\n  tempo: 85\nsolace:\n  tempo: 140\nwhenSheComes:\n  tempo: 104\n#Others\nbypass:\n  tempo: 120\nfalseFlag: \n  tempo: 192\nwhiteLikeHeaven:\n  tempo: 120\nangelo:\n  tempo: 124\n  quantize: 5\nringFinger:\n  tempo: 113\n  quantize: $qn\n#Past Life\nanteroom:\n  tempo: 120\nbutterflyKnife:\n  tempo: 98\ncalifornia:\n  tempo: 70\ngreyShip:\n  tempo: 120\nmarked:\n  tempo: 90\nmilkMan:\n  tempo: 106\n  quantize: $qn\n#Exile\n33NihilisticAndFemale:\n  tempo: 120\n  quantize: 5\n7Years:\n  tempo: 120\naryanNation:\n  tempo: 116\nbreathalyzer:\n  tempo: 70\n  quantize: $qn\nbloodAndChalk:\n  tempo: 120\n  quantize: $qn\ndownAndOut:\n  tempo: 114\nlsd:\n  tempo: 92\n  quantize: $qn\npapaer:\n  tempo: 84\ndestroy:\n  tempo: 164\nreceiveLove:\n  tempo: 120"
 
 /***/ })
 /******/ ]);

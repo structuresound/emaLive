@@ -16,30 +16,18 @@ interface Globals {
 
 let globals: Globals = {};
 
-max.init = () => {
-  post('recompiled');
+let ready = false;
 
-  // setInterval(2000, () => {
-  //   post(JSON.stringify(songs.solace.tempo));
-  // });
-
-  globals = {
-    tempo: new JsApi('tempo')
-  }
-
-  outlet(0, 'songs _parameter_range ' + Object.keys(songs).join(' '));
-}
+on('init', (args) => {
+  globals.info = new JsApi('live_set');
+  globals.tempo = new JsApi('live_set song tempo');
+  outlet(0, 'songs _parameter_range ' + Object.keys(songs).sort().join(' '));
+  ready = true;
+});
 
 on('setSong', (args) => {
   const song = args[0];
-  post('set song' + args[0]);
   const info = songs[song];
-
-  post(info);
-  globals['tempo'].set('value', info.tempo);
+  post('set song ' + song + ' @ ' + info.tempo);
+  globals.tempo.set('value', info.tempo);
 });
-
-max.myFunc = () => {
-  post('myFunc');
-}
-
