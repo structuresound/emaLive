@@ -1657,15 +1657,18 @@ var globals = {};
 var ready = false;
 max_1.on('init', function (args) {
     globals.info = new ableton_1.JsApi('live_set');
-    globals.tempo = new ableton_1.JsApi('live_set song tempo');
     max_1.outlet(0, 'songs _parameter_range ' + Object.keys(songs).sort().join(' '));
     ready = true;
 });
 max_1.on('setSong', function (args) {
+    if (!globals.info) {
+        max_1.post('init before settings song');
+        return;
+    }
     var song = args[0];
     var info = songs[song];
-    max_1.post('set song ' + song + ' @ ' + info.tempo);
-    globals.tempo.set('value', info.tempo);
+    max_1.post('set song ' + song + ' @ ' + info.tempo + '\n');
+    globals.info.set('tempo', info.tempo);
 });
 
 
