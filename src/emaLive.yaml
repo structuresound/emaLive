@@ -1,26 +1,79 @@
+$<:
+  qn: 7
+#Future's Void
+100Years:
+  tempo: 80
 3Jane:
   tempo: 92
-  quantize: 7
+  quantize: $qn
 cthulu:
   tempo: 144
-falseFlag: 
-  tempo: 192
 deadCelebrity:
   tempo: 78
-  quantize: 7
-butterflyKnife:
-  tempo: 98
-california:
-  tempo: 70
-marked:
-  tempo: 90
-sattelites:
+  quantize: $qn
+neuromancer:
+  tempo: 100
+satellites:
   tempo: 120
   quantize: 5
 smolder:
   tempo: 80
-  quantize: 7
-neuromancer:
-  tempo: 100
+  quantize: $qn
+soBlonde:
+  tempo: 85
 solace:
   tempo: 140
+whenSheComes:
+  tempo: 104
+#Others
+bypass:
+  tempo: 120
+falseFlag: 
+  tempo: 192
+whiteLikeHeaven:
+  tempo: 120
+angelo:
+  tempo: 124
+  quantize: 5
+ringFinger:
+  tempo: 113
+  quantize: $qn
+#Past Life
+anteroom:
+  tempo: 120
+butterflyKnife:
+  tempo: 98
+california:
+  tempo: 70
+greyShip:
+  tempo: 120
+marked:
+  tempo: 90
+milkMan:
+  tempo: 106
+  quantize: $qn
+#Exile
+33NihilisticAndFemale:
+  tempo: 120
+  quantize: 5
+7Years:
+  tempo: 120
+aryanNation:
+  tempo: 116
+breathalyzer:
+  tempo: 70
+  quantize: $qn
+bloodAndChalk:
+  tempo: 120
+  quantize: $qn
+downAndOut:
+  tempo: 114
+lsd:
+  tempo: 92
+  quantize: $qn
+papaer:
+  tempo: 84
+destroy:
+  tempo: 164
+receiveLove:
+  tempo: 120
